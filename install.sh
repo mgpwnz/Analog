@@ -50,17 +50,16 @@ cd $HOME
 if [ ! -d $HOME/analog ]; then
 mkdir $HOME/analog
 fi
-cd $HOME/analog
 sleep 1
 read -p "Enter node NAME: " NAME
 echo 'export NAME='${NAME}
 # Create script 
 tee $HOME/analog/docker-compose.yml > /dev/null <<EOF
 version: "3.7"
-name: whitebit
+name: analog
 
 services:
-  fullnode:
+  node:
     image: analoglabs/timechain
     restart: always
     command: |
@@ -81,7 +80,8 @@ volumes:
 EOF
 sleep 2
 #docker run
-docker compose up -d && docker compose logs -f --tail 1000
+docker compose -f $HOME/analog/docker-compose.yml up -d
+docker logs -f analog-node
 }
 uninstall() {
 if [ ! -d "$HOME/analog" ]; then
@@ -90,7 +90,7 @@ fi
 read -r -p "Wipe all DATA? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
-cd $HOME/analog && docker compose down -v
+docker compose -f $HOME/analog/docker-compose.yml down -v
 rm -rf $HOME/analog
         ;;
     *)
