@@ -20,10 +20,13 @@ while test $# -gt 0; do
 done
 install() {
 #docker install
-cd
-touch $HOME/.bash_profile
-. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
 cd $HOME
+. <(wget -qO- https://raw.githubusercontent.com/mgpwnz/VS/main/docker.sh)
+#websocat
+wget https://github.com/vi/websocat/releases/latest/download/websocat.x86_64-unknown-linux-musl -O websocat
+chmod +x websocat
+sudo mv websocat /usr/local/bin/
+websocat --version
 #create dir and config
 if [ ! -d $HOME/analog ]; then
 mkdir $HOME/analog
