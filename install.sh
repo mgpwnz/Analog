@@ -44,16 +44,17 @@ services:
     image: analoglabs/timechain
     restart: always
     command: |
-      --base-path /data
+      --base-path /.analog
       --unsafe-rpc-external
       --rpc-methods=Unsafe
       --name $NAME
+      --validator
       --telemetry-url='wss://telemetry.analog.one/submit 9'
     ports:
     - '9944:9944'
-    - '30303:30303'
+    - '30303:30333'
     volumes:
-    - ${HOME}/analog/data:/root
+    - ${HOME}/analog:/.analog
 
 volumes:
   data:
