@@ -54,10 +54,10 @@ services:
     - '9944:9944'
     - '30303:30333'
     volumes:
-    - ${HOME}/data:/.analog
+    - ${HOME}/analog:/.analog
 
 volumes:
-  data:
+  analog:
 
 EOF
 sleep 2
