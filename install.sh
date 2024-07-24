@@ -41,7 +41,7 @@ name: analog
 
 services:
   node:
-    image: analoglabs/timenode-test:latest
+    image: analoglabs/timechain
     restart: always
     command: |
       --base-path /.analog
@@ -54,7 +54,7 @@ services:
     - '9944:9944'
     - '30303:30333'
     volumes:
-    - ${HOME}/.analog:/.analog
+    - ${HOME}/data:/.analog
 
 volumes:
   data:
