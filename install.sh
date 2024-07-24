@@ -28,14 +28,14 @@ chmod +x websocat
 sudo mv websocat /usr/local/bin/
 websocat --version
 #create dir and config
-if [ ! -d $HOME/analog ]; then
-mkdir $HOME/analog
+if [ ! -d $HOME/.analog ]; then
+mkdir $HOME/.analog
 fi
 sleep 1
 read -p "Enter node NAME: " NAME
 echo 'export NAME='${NAME}
 # Create script 
-tee $HOME/analog/docker-compose.yml > /dev/null <<EOF
+tee $HOME/.analog/docker-compose.yml > /dev/null <<EOF
 version: "3.7"
 name: analog
 
@@ -54,7 +54,7 @@ services:
     - '9944:9944'
     - '30303:30333'
     volumes:
-    - ${HOME}/analog:/.analog
+    - ${HOME}/.analog:/.analog
 
 volumes:
   data:
@@ -62,18 +62,18 @@ volumes:
 EOF
 sleep 2
 #docker run
-docker compose -f $HOME/analog/docker-compose.yml up -d
+docker compose -f $HOME/.analog/docker-compose.yml up -d
 docker logs -f analog-node-1
 }
 uninstall() {
-if [ ! -d "$HOME/analog" ]; then
+if [ ! -d "$HOME/.analog" ]; then
     break
 fi
 read -r -p "Wipe all DATA? [y/N] " response
 case "$response" in
     [yY][eE][sS]|[yY]) 
-docker compose -f $HOME/analog/docker-compose.yml down -v
-rm -rf $HOME/analog
+docker compose -f $HOME/.analog/docker-compose.yml down -v
+rm -rf $HOME/.analog
         ;;
     *)
 	echo Canceled
