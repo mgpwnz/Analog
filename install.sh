@@ -45,7 +45,7 @@ name: analog
 
 services:
   node:
-    image: analoglabs/timechain-test:487a8e4d
+    image: analoglabs/timenode-test:latest
     restart: always
     command: |
       --base-path /.analog
