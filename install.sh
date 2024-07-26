@@ -69,15 +69,6 @@ docker compose -f $HOME/analog/docker-compose.yml up -d
 docker logs -f analog-node-1
 }
 fix() {
-cd $HOME/analog
-docker compose stop
-rm -rf chains/anlogcc1/paritydb/full
-curl -O https://analog-public.s3.amazonaws.com/backup/testnet-backup.tar.gz
-tar -xvzf testnet-backup.tar.gz -C .
-sed -i -e "s%image: analoglabs/timechain%image: analoglabs/timenode-test:latest%g" $HOME/analog/docker-compose.yml
-docker compose start
-cd $HOME
-docker logs -f analog-node-1
 
 }
 
