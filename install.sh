@@ -52,7 +52,6 @@ services:
       --unsafe-rpc-external
       --rpc-methods=Unsafe
       --name $NAME
-      --validator
       --telemetry-url='wss://telemetry.analog.one/submit 9'
     ports:
     - '9944:9944'
